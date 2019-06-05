@@ -1,0 +1,81 @@
+#include "Node.h"
+
+Node::Node(int id)
+{
+    this->id = id;
+    this->centrality = 0;
+    this->resetValues();
+}
+
+Node::~Node()
+{
+    for (unsigned int i = 0; i < this->edges.size(); i++) {
+        delete this->edges[i];
+    }
+}
+
+void Node::addEdge(Node *endpoint, int cost)
+{
+    Edge *edge = new Edge(endpoint, cost);
+    this->edges.push_back(edge);
+}
+
+void Node::resetValues()
+{
+    this->visited = false;
+    this->distance = std::numeric_limits<int>::max();
+    this->parent = nullptr;
+}
+
+void Node::resetCentrality()
+{
+    this->centrality = 0;
+}
+int Node::getCentrality()
+{
+    return centrality;
+}
+void Node::setVisited(bool visited)
+{
+    this->visited = visited;
+}
+bool Node::isVisited()
+{
+    return this->visited;
+}
+void Node::setDistance(int distance)
+{
+    this->distance = distance;
+}
+int Node::getDistance()
+{
+    return this->distance;
+}
+void Node::setParent(Node* parent)
+{
+    this->parent = parent;
+}
+Node* Node::getParent()
+{
+    return this->parent;
+}
+
+void Node::dijkstra()
+{
+    Edge* edge;
+    vector<Edge*>::iterator ptr;
+    int cost = 0;
+    Node* node;
+
+    for(ptr = this->edges.begin(); ptr < this->edges.end(); ptr++){
+        edge = *ptr;
+        cost = edge->getCost();
+        node = edge->getEndpoint();
+
+        if((cost + this->getDistance()) < node->getDistance()){
+            node->setDistance(cost + this->getDistance());
+            node->setParent(this);
+        }
+    }
+}
+
