@@ -59,14 +59,14 @@
 	<iostream>
 	"Graph.h"
 
-1559794431 c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\include\graph.h
+1560368471 c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\include\graph.h
 	"Node.h"
 	<fstream>
 	<limits>
 	<iostream>
 	<vector>
 
-1559794431 c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\include\node.h
+1560369889 c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\include\node.h
 	"Edge.h"
 	<iostream>
 	<vector>
@@ -77,9 +77,9 @@
 1559794431 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\edge.cpp
 	"Edge.h"
 
-1559794431 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\graph.cpp
+1560369786 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\graph.cpp
 	"Graph.h"
 
-1559794431 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\node.cpp
+1560369968 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\node.cpp
 	"Node.h"
 

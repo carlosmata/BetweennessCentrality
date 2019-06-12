@@ -83,7 +83,6 @@ bool Graph::addEdges(string filename)
                                 counter++;
                             }
 
-                            //cout<< nodei << "=>" << nodej << endl;
                             //Add the edge
                             if(nodei < this->numberNodes && nodej < this->numberNodes){
                                 this->addEdge(nodei, nodej, 1);
@@ -170,6 +169,9 @@ void Graph::computeCentrality()
     //Compute the new centrality
     for(int i= 0; i < this->numberNodes; i++){
         this->dijkstra(this->nodes[i]);
+        for(int j= 0; j < this->numberNodes; j++){
+            this->computeCentralityPath(this->nodes[i], this->nodes[j], this->nodes[j]->getParents().size());
+        }
     }
  }
 /**
@@ -189,26 +191,25 @@ void Graph::computeCentrality()
     source->setDistance(0);
 
     while((node = this->getSmallDistance()) != nullptr){
-        for(int i = 0; i < node->getEdges().size(); i++){
+        for(unsigned int i = 0; i < node->getEdges().size(); i++){
             edge = node->getEdges()[i];
             endpoint = edge->getEndpoint();
 
             if(endpoint != nullptr && !endpoint->isVisited()){
                 cost = edge->getCost();
                 totalcost = cost + node->getDistance();
-                if(totalcost < endpoint->getDistance()){ //Verify if is equal
+                if(totalcost < endpoint->getDistance()){ //Add only one path
                     endpoint->setDistance(totalcost);
                     endpoint->setParent(node);
                 }
                 else if(totalcost == endpoint->getDistance()){ //Add other shortest path
-                    //Add other parent
                     endpoint->addParent(node);
                 }
             }
         }
         node->setVisited(true);
         //Put the centrality HERE
-        this->computeCentralityPath(source, node);
+        //this->computeCentralityPath(source, node, node->getParents().size()); ?? put here??
     }
 
  }
@@ -216,16 +217,19 @@ void Graph::computeCentrality()
  /**
     Compute the centrality of a path from a source and a tail
  */
- void Graph::computeCentralityPath(Node* source, Node* tail)
+ void Graph::computeCentralityPath(Node* source, Node* tail, unsigned int n_shortest_path)
  {
      Node* parent = nullptr;
 
-     for(int i = 0; i < tail->getParents().size(); i++){
-         parent = tail->getParents()[i];
-     }
-     while(parent != nullptr && parent != source){
-        parent->incrementCentrality(); //increment (1 / number of parents)
-        parent = parent->getParents();
+     if(tail != source){
+         for(unsigned int i = 0; i < tail->getParents().size(); i++){
+             parent = tail->getParents()[i];
+             if(parent != source){
+                float incremento = 1.0/n_shortest_path;
+                parent->incrementCentrality(incremento);
+             }
+             this->computeCentralityPath(source, parent, n_shortest_path); //* tail->getParents().size() ??
+         }
      }
  }
 
@@ -250,6 +254,6 @@ void Graph::printCentrality()
 {
     for(int i= 0; i < this->numberNodes; i++){
         cout<< "Node: " << this->nodes[i]->getId()
-            << " Centrality:" << this->nodes[i]->getCentrality() << endl;
+            << " Centrality:" << this->nodes[i]->getCentrality() / 2 << endl;
     }
 }

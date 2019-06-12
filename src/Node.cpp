@@ -51,7 +51,7 @@ int Node::getId()
 /**
     Increment the centrality 1 by 1
 */
-void Node::incrementCentrality(float increment)
+void Node::incrementCentrality(double increment)
 {
     this->centrality+=increment;
 }
@@ -59,9 +59,9 @@ void Node::incrementCentrality(float increment)
 /**
     Get the centrality of the node
 */
-int Node::getCentrality()
+double Node::getCentrality()
 {
-    return centrality;
+    return this->centrality;
 }
 /**
     Set the value to visited

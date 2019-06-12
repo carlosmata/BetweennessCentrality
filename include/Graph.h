@@ -28,7 +28,7 @@ class Graph
         void dijkstra(Node* source);
         int readNumberOfNodes(string filename);
         Node* getSmallDistance();
-        void computeCentralityPath(Node* source, Node* tail);
+        void computeCentralityPath(Node* source, Node* tail, unsigned int n_shortest_path);
 
 };
 

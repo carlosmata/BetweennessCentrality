@@ -21,8 +21,8 @@ class Node
 
         int getId();
         void resetCentrality();
-        void incrementCentrality(float increment);
-        int getCentrality();
+        void incrementCentrality(double increment);
+        double getCentrality();
         void setVisited(bool visited);
         bool isVisited();
         void setDistance(int distance);
@@ -35,7 +35,7 @@ class Node
         int id;
         vector<Edge*> edges;
         //To centrality
-        float centrality;
+        double centrality;
         bool visited;
         int distance;
         vector<Node*> parents;
