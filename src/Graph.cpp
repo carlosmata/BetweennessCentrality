@@ -167,7 +167,7 @@ void Graph::computeCentrality()
         this->nodes[i]->resetCentrality();
     }
 
-
+    //Compute the new centrality
     for(int i= 0; i < this->numberNodes; i++){
         this->dijkstra(this->nodes[i]);
     }
@@ -179,7 +179,7 @@ void Graph::computeCentrality()
  {
     Edge* edge;
     vector<Edge*>::iterator ptr;
-    int cost = 0;
+    int cost = 0, totalcost = 0;
     Node* node = nullptr, *endpoint = nullptr;
 
     //First reset the values parent, distance, and visited
@@ -195,10 +195,14 @@ void Graph::computeCentrality()
 
             if(endpoint != nullptr && !endpoint->isVisited()){
                 cost = edge->getCost();
-
-                if((cost + node->getDistance()) < endpoint->getDistance()){
-                    endpoint->setDistance(cost + node->getDistance());
+                totalcost = cost + node->getDistance();
+                if(totalcost < endpoint->getDistance()){ //Verify if is equal
+                    endpoint->setDistance(totalcost);
                     endpoint->setParent(node);
+                }
+                else if(totalcost == endpoint->getDistance()){ //Add other shortest path
+                    //Add other parent
+                    endpoint->addParent(node);
                 }
             }
         }
@@ -214,10 +218,14 @@ void Graph::computeCentrality()
  */
  void Graph::computeCentralityPath(Node* source, Node* tail)
  {
-     Node* parent = tail->getParent();
+     Node* parent = nullptr;
+
+     for(int i = 0; i < tail->getParents().size(); i++){
+         parent = tail->getParents()[i];
+     }
      while(parent != nullptr && parent != source){
-        parent->incrementCentrality();
-        parent = parent->getParent();
+        parent->incrementCentrality(); //increment (1 / number of parents)
+        parent = parent->getParents();
      }
  }
 
@@ -241,7 +249,7 @@ void Graph::computeCentrality()
 void Graph::printCentrality()
 {
     for(int i= 0; i < this->numberNodes; i++){
-        cout<< "Node: " << this->nodes[i]->getId() 
+        cout<< "Node: " << this->nodes[i]->getId()
             << " Centrality:" << this->nodes[i]->getCentrality() << endl;
     }
 }

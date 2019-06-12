@@ -7,7 +7,7 @@ int  readNumberOfNodes(string filename);
 
 int main(int argc, char **argv)
 {
-    string filename = "datasets/test.txt";
+    string filename = "datasets/test2.txt";
     Graph *g = new Graph(filename);
 
     if(g->getNumberNodes() > 0)

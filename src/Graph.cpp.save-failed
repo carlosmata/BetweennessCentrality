@@ -167,11 +167,9 @@ void Graph::computeCentrality()
         this->nodes[i]->resetCentrality();
     }
 
-
+    //Compute the new centrality
     for(int i= 0; i < this->numberNodes; i++){
         this->dijkstra(this->nodes[i]);
-        cout<<"Dijkstra "<<i<<endl;
-        //add the centrality
     }
  }
 /**
@@ -181,7 +179,7 @@ void Graph::computeCentrality()
  {
     Edge* edge;
     vector<Edge*>::iterator ptr;
-    int cost = 0;
+    int cost = 0, totalcost = 0;
     Node* node = nullptr, *endpoint = nullptr;
 
     //First reset the values parent, distance, and visited
@@ -191,15 +189,15 @@ void Graph::computeCentrality()
     source->setDistance(0);
 
     while((node = this->getSmallDistance()) != nullptr){
-        for(ptr = node->getEdges().begin(); ptr < node->getEdges().end(); ptr++){
-            edge = *ptr;
+        for(int i = 0; i < node->getEdges().size(); i++){
+            edge = node->getEdges()[i];
             endpoint = edge->getEndpoint();
 
             if(endpoint != nullptr && !endpoint->isVisited()){
                 cost = edge->getCost();
-
-                if((cost + node->getDistance()) < endpoint->getDistance()){
-                    endpoint->setDistance(cost + node->getDistance());
+                totalcost = cost + node->getDistance();
+                if(totalcost < endpoint->getDistance()){ //Verify if is equal
+                    endpoint->setDistance(totalcost);
                     endpoint->setParent(node);
                 }
             }
@@ -218,7 +216,7 @@ void Graph::computeCentrality()
  {
      Node* parent = tail->getParent();
      while(parent != nullptr && parent != source){
-        parent->incrementCentrality();
+        parent->incrementCentrality(); //increment (1 / number of parents)
         parent = parent->getParent();
      }
  }

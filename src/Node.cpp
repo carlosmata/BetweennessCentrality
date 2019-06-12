@@ -3,7 +3,7 @@
 Node::Node(int id)
 {
     this->id = id;
-    this->centrality = 0;
+    this->centrality = 0.0;
     this->resetValues();
 }
 
@@ -29,7 +29,7 @@ void Node::resetValues()
 {
     this->visited = false;
     this->distance = std::numeric_limits<int>::max();
-    this->parent = nullptr;
+    this->parents.clear();
 }
 
 /**
@@ -37,7 +37,7 @@ void Node::resetValues()
 */
 void Node::resetCentrality()
 {
-    this->centrality = 0;
+    this->centrality = 0.0;
 }
 
 /**
@@ -51,9 +51,9 @@ int Node::getId()
 /**
     Increment the centrality 1 by 1
 */
-void Node::incrementCentrality()
+void Node::incrementCentrality(float increment)
 {
-    this->centrality++;
+    this->centrality+=increment;
 }
 
 /**
@@ -92,18 +92,26 @@ int Node::getDistance()
     return this->distance;
 }
 /**
-    Set the parent to the shortest path
+    Set only one parent to the shortest path
 */
 void Node::setParent(Node* parent)
 {
-    this->parent = parent;
+    this->parents.clear();
+    this->parents.push_back(parent);
+}
+/**
+    Set one parent to the shortest path
+*/
+void Node::addParent(Node* parent)
+{
+    this->parents.push_back(parent);
 }
 /**
     Get the parent to the shortest path
 */
-Node* Node::getParent()
+vector<Node*> Node::getParents()
 {
-    return this->parent;
+    return this->parents;
 }
 /**
     Get the edges of the node

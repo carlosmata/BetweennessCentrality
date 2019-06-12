@@ -19,8 +19,9 @@ class Node
 
         vector<Edge*> getEdges();
 
+        int getId();
         void resetCentrality();
-        void incremetCentrality();
+        void incrementCentrality();
         int getCentrality();
         void setVisited(bool visited);
         bool isVisited();
@@ -29,13 +30,16 @@ class Node
         void setParent(Node* parent);
         Node* getParent();
 
-        //void dijkstra();
-
     private:
         int id;
         vector<Edge*> edges;
         //To centrality
-        int centrality;
+        float centrality;
+
+
+
+
+
         bool visited;
         int distance;
         Node* parent;
