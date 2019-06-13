@@ -55,9 +55,11 @@
 1559775401 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality\src\node.cpp
 	"Node.h"
 
-1560294016 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\main.cpp
+1560392018 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\main.cpp
 	<iostream>
 	"Graph.h"
+	<bits/stdc++.h>
+	<chrono>
 
 1560368471 c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\include\graph.h
 	"Node.h"
@@ -77,7 +79,7 @@
 1559794431 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\edge.cpp
 	"Edge.h"
 
-1560369786 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\graph.cpp
+1560370774 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\graph.cpp
 	"Graph.h"
 
 1560369968 source:c:\users\carlos\google drive\cinvestav\cuatrimestre 3\paralelismo\project\betweennesscentrality (1)\src\node.cpp
